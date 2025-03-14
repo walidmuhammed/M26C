@@ -14,13 +14,7 @@ function App() {
   });
 
   useEffect(() => {
-    let targetDate = localStorage.getItem("targetDate");
-
-    if (!targetDate) {
-      // Set the target date to 60 days from now and store it
-      targetDate = new Date().getTime() + 60 * 24 * 60 * 60 * 1000;
-      localStorage.setItem("targetDate", targetDate);
-    }
+    let targetDate: number = new Date(2025, 4, 15, 0, 0, 0).getTime();
 
     const interval = setInterval(() => {
       const now = new Date().getTime();
