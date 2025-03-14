@@ -10,7 +10,7 @@ const getInitialCountdown = () => {
   let targetDate = localStorage.getItem("targetDate");
 
   if (!targetDate) {
-    targetDate = (new Date().getTime() + 60 * 24 * 60 * 60 * 1000).toString();
+    targetDate = new Date(2025, 4, 15, 0, 0, 0, 0).getTime().toString();
     localStorage.setItem("targetDate", targetDate);
   }
 
@@ -30,10 +30,14 @@ const getInitialCountdown = () => {
 };
 
 export default function Home() {
-  const [countdown, setCountdown] = useState(getInitialCountdown());
+  const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
   const [email, setEmail] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    setCountdown(getInitialCountdown());
+  }, []);
 
   useEffect(() => {
     // Function to check screen size and update background
