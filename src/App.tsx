@@ -14,11 +14,15 @@ function App() {
   });
 
   useEffect(() => {
-    let targetDate: number = new Date(2025, 4, 15, 0, 0, 0).getTime();
+    let targetDate = localStorage.getItem("targetDate");
 
+    if (!targetDate) {
+      targetDate = new Date(2025, 4, 15, 0, 0, 0, 0).getTime().toString();
+      localStorage.setItem("targetDate", targetDate);
+    }
     const interval = setInterval(() => {
       const now = new Date().getTime();
-      const distance = targetDate - now;
+      const distance = parseInt(targetDate) - now;
 
       setCountdown({
         days: Math.floor(distance / (1000 * 60 * 60 * 24)),
